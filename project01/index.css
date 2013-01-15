@@ -6,6 +6,7 @@ body
 	border-width: 1px;
 	border-color: black;
 	padding-top: 0em;
+	width: 80em;
 }
 
 #banner 
@@ -16,7 +17,7 @@ body
 	text-indent: 1em;
 }
 
-h1
+h1, h2
 {
 	margin-bottom: 0px;
 	letter-spacing: -.1em;
@@ -68,21 +69,39 @@ a
 #main
 {
 	background-color: white;
-	margin-top: 0px;
 }
 
-#footer
+#form_area
 {
-	background-color: #D3D3D3;
-	margin: 0px;
+	display: block;
+	width: 40em;
 }
 
 #life_progress
 {
 	background-color: #D3D3D3;
 	margin: 0px;
+	position: relative;
+	bottom: 10.5em;
+	right: 1em;
 	float: right;
+	width: 25em;
+	text-indent: .2em;
 }
+
+#footer
+{
+	background-color: #D3D3D3;
+	margin: 0px;
+	text-indent: .2em;
+}
+
+label
+{
+	padding-right: 5em;
+	width: 12em;
+}
+
 
 
 
