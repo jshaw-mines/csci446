@@ -68,9 +68,21 @@ a
 #main
 {
 	background-color: white;
-	margin-top: 0px
+	margin-top: 0px;
 }
 
+#footer
+{
+	background-color: #D3D3D3;
+	margin: 0px;
+}
+
+#life_progress
+{
+	background-color: #D3D3D3;
+	margin: 0px;
+	float: right;
+}
 
 
 
