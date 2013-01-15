@@ -4,24 +4,26 @@ body
 	background-color: gray;
 }
 
-h1 
-{
-	letter-spacing: -.1em;
-	
-}
 
-#header 
+
+#banner 
 {
 	background-color: #C0C0C0;
-	height: 5em;
-	line-height: .5em;
+	height: 4.5em;
 	text-indent: 1em;
 }
 
-#header p
+h1
+{
+	margin-bottom: 0px;
+	letter-spacing: -.1em;
+}
+
+#banner p
 {
 	font-size: .7em;
 	color: gray;
+	margin-top: 0px;
 }
 
 
