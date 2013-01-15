@@ -2,12 +2,16 @@ body
 {
 	font-family: "Arial Black", Gadget, sans-serif;
 	background-color: gray;
-	
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	padding-top: 0em;
 }
 
 #banner 
 {
 	background-color: #C0C0C0;
+	padding: 0px;
 	height: 4.5em;
 	text-indent: 1em;
 }
@@ -40,25 +44,31 @@ a:hover
 {
 	background-color: black;	
 	height: 2em;
-	
+	margin: 0px;
 }
 
 #list
 {
-	margin-top: 0px;
+	margin: 0px;
+	padding-left: 1em;
 }
 
 li
 {
 	display: inline;
 	margin-right: 2em;
-	margin-left: 0px;
 	vertical-align: middle;
 }
 
 a
 {
 	text-decoration: none;
+}
+
+#main
+{
+	background-color: white;
+	margin-top: 0px
 }
 
 
