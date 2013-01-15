@@ -2,9 +2,8 @@ body
 {
 	font-family: "Arial Black", Gadget, sans-serif;
 	background-color: gray;
+	
 }
-
-
 
 #banner 
 {
@@ -25,5 +24,37 @@ h1
 	color: gray;
 	margin-top: 0px;
 }
+
+a
+{
+	color: white;
+}	
+
+a:hover
+{
+	color: gray;
+}
+
+#menubar
+{
+	background-color: black;	
+	height: 2em;	
+}
+
+li
+{
+	display: inline;
+	margin-right: 2em;
+	margin-left: 0px;
+	vertical-align: middle;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+
+
 
 
