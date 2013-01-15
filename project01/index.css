@@ -1,4 +1,27 @@
+body 
+{
+	font-family: "Arial Black", Gadget, sans-serif;
+	background-color: gray;
+}
+
+h1 
+{
+	letter-spacing: -.1em;
+	
+}
+
 #header 
 {
 	background-color: #C0C0C0;
+	height: 5em;
+	line-height: .5em;
+	text-indent: 1em;
 }
+
+#header p
+{
+	font-size: .7em;
+	color: gray;
+}
+
+
