@@ -23,6 +23,7 @@ h1
 	font-size: .7em;
 	color: gray;
 	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 a
@@ -38,7 +39,13 @@ a:hover
 #menubar
 {
 	background-color: black;	
-	height: 2em;	
+	height: 2em;
+	
+}
+
+#list
+{
+	margin-top: 0px;
 }
 
 li
