@@ -24,7 +24,19 @@ class AlbumApp
 
 	def render_list (request)
 		response = Rack::Response.new
-		File.open("top_100_albums")
+		f = File.open("top_100_albums.txt")
+		response.write(File.open("list.html").read)
+		
+		n=1
+		f.each do |line|
+			response.write("<tr><td>#{n}</td>")
+			line.split(", ").each do |cell|
+				response.write("<td>#{cell}</td>")
+			end
+			response.write("</tr>")
+			x+=1
+		end
+		response.write("</table></body></html>")
 		response.finish
 	end
 
