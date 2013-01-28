@@ -6,6 +6,7 @@ class AlbumApp
 		case request.path
 		when "/form" then render_form(request)
 		when "/list" then render_list(request)
+		when "/list.css" then render_css(request)
 		else render_404
 		end
 	end
@@ -29,13 +30,13 @@ class AlbumApp
 		
 		get = request.GET()
 		order = get["order"]
-		rank = get["rank"]
+		rank = get["rank"].to_i
 		
 		data = []
 		m=0
 		f.each do |line|	
 			val = line.split(", ")
-			data[m] = [val[0], val[1]]
+			data[m] = [val[0], val[1].chomp]
 			m+=1
 		end
 		
@@ -44,13 +45,13 @@ class AlbumApp
 			when "name" then data.sort! {|a, b| a[0] <=> b[0]}
 			when "year" then data.sort! {|a, b| a[1] <=> b[1]}
 		end
-		response.write("<tr style=\"color:red\"><tr>Hey</tr></td>")
+		
 		n=1
 		data.each do |cell|	
 			name = cell[0]
 			year = cell[1]
 			if rank == n
-				response.write("<tr style=\"color:red\">")
+				response.write("<tr id=\"highlight\">")
 			else
 				response.write("<tr>")
 			end
@@ -62,6 +63,12 @@ class AlbumApp
 		response.finish
 	end
 
+	def render_css (request)
+		response = Rack::Response.new
+		response.write(File.open("list.css").read)
+		response.finish
+	end
+	
 	def render_404
 		[404, {"Contenet-Type" => "text/plain"}, ["GO AWAY... newb"]]
 	end
