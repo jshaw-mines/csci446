@@ -28,23 +28,36 @@ class AlbumApp
 		response.write(File.open("list.html").read)
 		
 		get = request.GET()
-		order = get[order]
-		rank = get[rank]
+		order = get["order"]
+		rank = get["rank"]
 		
-		data = Hash.new
-	
+		data = []
+		m=0
+		f.each do |line|	
+			val = line.split(", ")
+			data[m] = [val[0], val[1]]
+			m+=1
+		end
+		
+		case order
+			when "rank" then #dont sort
+			when "name" then data.sort! {|a, b| a[0] <=> b[0]}
+			when "year" then data.sort! {|a, b| a[1] <=> b[1]}
+		end
+		response.write("<tr style=\"color:red\"><tr>Hey</tr></td>")
 		n=1
-		f.each do |line|
-			line.split(", ").each do |k, v|
-				data[k] = v
+		data.each do |cell|	
+			name = cell[0]
+			year = cell[1]
+			if rank == n
+				response.write("<tr style=\"color:red\">")
+			else
+				response.write("<tr>")
 			end
-			response.write("<tr><td>#{n}</td>")
-			line.split(", ").each do |cell|
-				response.write("<td>#{cell}</td>")
-			end
-			response.write("</tr>")
+			response.write("<td>#{n}</td><td>#{name}</td><td>#{year}</td></tr>")
 			n+=1
 		end
+		
 		response.write("</table></body></html>")
 		response.finish
 	end
