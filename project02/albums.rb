@@ -27,14 +27,23 @@ class AlbumApp
 		f = File.open("top_100_albums.txt")
 		response.write(File.open("list.html").read)
 		
+		get = request.GET()
+		order = get[order]
+		rank = get[rank]
+		
+		data = Hash.new
+	
 		n=1
 		f.each do |line|
+			line.split(", ").each do |k, v|
+				data[k] = v
+			end
 			response.write("<tr><td>#{n}</td>")
 			line.split(", ").each do |cell|
 				response.write("<td>#{cell}</td>")
 			end
 			response.write("</tr>")
-			x+=1
+			n+=1
 		end
 		response.write("</table></body></html>")
 		response.finish
