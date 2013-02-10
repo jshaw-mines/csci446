@@ -30,11 +30,8 @@ class AlbumApp
     File.open("list_top.html", "rb") { |template| response.write(template.read) }
     response.write("<p>Sorted by #{sort_order.capitalize}</p>\n")
 
-	ass = get_albums(sort_order)
-	
-    albums = File.readlines("top_100_albums.txt").each_with_index.map { |record, i| Album.new(i + 1, record) }
-
-    albums.sort! { |l, r| l.send(sort_order.intern) <=> r.send(sort_order.intern) }  # HUGE SECURITY HOLE
+	raw_albums = get_albums(sort_order)
+	albums = raw_albums.each { |album| Album.new(album.join ",") }
 
     response.write("<table>\n")
     write_album_table_rows(albums, response, rank_to_highlight)
@@ -63,7 +60,7 @@ class AlbumApp
 		db = SQLite3::Database.open("albums.sqlite3.db")
 		
 		stm = db.prepare "SELECT * FROM albums ORDER BY #{order}"
-		res = stm.execute	
+		res = stm.execute
 		
 	rescue SQLite3::Exception => e
 		puts "Exception"
