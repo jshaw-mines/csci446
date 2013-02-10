@@ -30,8 +30,7 @@ class AlbumApp
     File.open("list_top.html", "rb") { |template| response.write(template.read) }
     response.write("<p>Sorted by #{sort_order.capitalize}</p>\n")
 
-	raw_albums = get_albums(sort_order)
-	albums = raw_albums.each { |album| Album.new(album.join ",") }
+	albums = get_albums(sort_order)
 
     response.write("<table>\n")
     write_album_table_rows(albums, response, rank_to_highlight)
@@ -60,7 +59,9 @@ class AlbumApp
 		db = SQLite3::Database.open("albums.sqlite3.db")
 		
 		stm = db.prepare "SELECT * FROM albums ORDER BY #{order}"
-		res = stm.execute
+		raw_albums = stm.execute
+		
+		albums = raw_albums.map { |album| Album.new(album.join ",") }
 		
 	rescue SQLite3::Exception => e
 		puts "Exception"
@@ -71,7 +72,8 @@ class AlbumApp
 		db.close if db
 	end
 	
-	return res
+	return albums
+	
   end
 
   def row_tag_for(album, rank_to_highlight)
