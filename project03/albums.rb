@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'rack'
+require 'sqlite3'
 require_relative 'album'
 
 class AlbumApp
@@ -52,6 +53,28 @@ class AlbumApp
       response.write("\t\t<td>#{album.year}</td>\n")
       response.write("\t</tr>\n")
     end
+  end
+  
+  def get_albums(order)
+	begin
+		db = SQLite3::Database.open(albums.sqlite3.db)
+		
+		stm = db.prepare "SELECT * FROM albums ORDER BY #{order}"
+		res = stm.execute
+		
+		rs.each do |row|
+			puts row.join "\s"
+		end
+		
+	rescue SQLite::Exception => e
+		puts "Exception"
+		puts e
+		
+	ensure
+		stm.close if stm
+		db.close if db
+	end
+	
   end
 
   def row_tag_for(album, rank_to_highlight)
