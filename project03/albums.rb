@@ -30,6 +30,8 @@ class AlbumApp
     File.open("list_top.html", "rb") { |template| response.write(template.read) }
     response.write("<p>Sorted by #{sort_order.capitalize}</p>\n")
 
+	ass = get_albums(sort_order)
+	
     albums = File.readlines("top_100_albums.txt").each_with_index.map { |record, i| Album.new(i + 1, record) }
 
     albums.sort! { |l, r| l.send(sort_order.intern) <=> r.send(sort_order.intern) }  # HUGE SECURITY HOLE
@@ -56,17 +58,14 @@ class AlbumApp
   end
   
   def get_albums(order)
+  
 	begin
-		db = SQLite3::Database.open(albums.sqlite3.db)
+		db = SQLite3::Database.open("albums.sqlite3.db")
 		
 		stm = db.prepare "SELECT * FROM albums ORDER BY #{order}"
-		res = stm.execute
+		res = stm.execute	
 		
-		rs.each do |row|
-			puts row.join "\s"
-		end
-		
-	rescue SQLite::Exception => e
+	rescue SQLite3::Exception => e
 		puts "Exception"
 		puts e
 		
@@ -75,6 +74,7 @@ class AlbumApp
 		db.close if db
 	end
 	
+	return res
   end
 
   def row_tag_for(album, rank_to_highlight)
