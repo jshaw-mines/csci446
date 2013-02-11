@@ -7,8 +7,8 @@ DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/albums.sqlite3.db")
 set :port, 8080
 
 post "/list" do
-	@order = params[:order]
-	@albums = Album.all(:order => @order.intern.asc)
+	@sort_order = params[:order]
+	@albums = Album.all(:order => params[:order].to_sym.asc)
 	@rank_to_highlight = params[:rank].to_i
 
 	erb :list
