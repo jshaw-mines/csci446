@@ -15,9 +15,11 @@ class AlbumApp
 
   def render_form(request)
     response = Rack::Response.new
-    File.open("form_top.html", "rb") { |form| response.write(form.read) }
-    (1..100).each { |i| response.write("<option value=\"#{i}\">#{i}</option>\n") }
-    File.open("form_bottom.html", "rb") { |form| response.write(form.read) }
+	erb = ERB.new(File.read("form.html.erb")).result(binding)
+	response.write(erb)
+    #File.open("form_top.html", "rb") { |form| response.write(form.read) }
+    #(1..100).each { |i| response.write("<option value=\"#{i}\">#{i}</option>\n") }
+    #File.open("form_bottom.html", "rb") { |form| response.write(form.read) }
     response.finish
   end
 
@@ -29,12 +31,9 @@ class AlbumApp
 	
 	albums = get_albums(sort_order)
 	
-	erb = ERB.new(File.read("list_top.html.erb")).result(binding)
+	erb = ERB.new(File.read("list.html.erb")).result(binding)
 	response.write(erb)
 	
-    #write_album_table_rows(albums, response, rank_to_highlight)
-
-    File.open("list_bottom.html", "rb") { |template| response.write(template.read) }
     response.finish
   end
 
