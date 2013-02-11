@@ -6,11 +6,14 @@ DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/albums.sqlite3.db")
 
 set :port, 8080
 
-POST "/list" do
-	
+post "/list" do
+	@order = params[:order]
+	@albums = Album.all(:order => @order.intern.asc)
+	@rank_to_highlight = params[:rank].to_i
+
 	erb :list
 end
 
-GET "/form" do
+get "/form" do
 	erb :form
 end
