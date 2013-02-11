@@ -17,9 +17,6 @@ class AlbumApp
     response = Rack::Response.new
 	erb = ERB.new(File.read("form.html.erb")).result(binding)
 	response.write(erb)
-    #File.open("form_top.html", "rb") { |form| response.write(form.read) }
-    #(1..100).each { |i| response.write("<option value=\"#{i}\">#{i}</option>\n") }
-    #File.open("form_bottom.html", "rb") { |form| response.write(form.read) }
     response.finish
   end
 
@@ -39,16 +36,6 @@ class AlbumApp
 
   def render_404
     [404, {"Content-Type" => "text/plain"}, ["Nothing here!"]]
-  end
-
-  def write_album_table_rows(albums, response, rank_to_highlight)
-    albums.each do |album|
-      response.write(row_tag_for(album, rank_to_highlight))
-      response.write("\t\t<td>#{album.rank}</td>\n")
-      response.write("\t\t<td>#{album.title}</td>\n")
-      response.write("\t\t<td>#{album.year}</td>\n")
-      response.write("\t</tr>\n")
-    end
   end
   
   def get_albums(order)
@@ -72,10 +59,6 @@ class AlbumApp
 	
 	return albums
 	
-  end
-
-  def row_tag_for(album, rank_to_highlight)
-    album.rank == rank_to_highlight ? "\t<tr class=\"highlighted\">\n" : "\t<tr>\n"
   end
 
 end
