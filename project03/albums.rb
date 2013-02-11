@@ -26,14 +26,13 @@ class AlbumApp
 
     sort_order = request.params['order']
     rank_to_highlight = request.params['rank'].to_i
-
-    File.open("list_top.html", "rb") { |template| response.write(template.read) }
-    response.write("<p>Sorted by #{sort_order.capitalize}</p>\n")
-
+	
 	albums = get_albums(sort_order)
-
-    response.write("<table>\n")
-    write_album_table_rows(albums, response, rank_to_highlight)
+	
+	erb = ERB.new(File.read("list_top.html.erb")).result(binding)
+	response.write(erb)
+	
+    #write_album_table_rows(albums, response, rank_to_highlight)
 
     File.open("list_bottom.html", "rb") { |template| response.write(template.read) }
     response.finish
